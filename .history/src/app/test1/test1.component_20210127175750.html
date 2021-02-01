@@ -1,0 +1,31 @@
+<div>
+  Search:
+  <input type="text" #input>
+</div>
+
+<div>
+  <span>Prev</span>
+  <button>
+    << /button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Cool column</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of filteredData$ | async">
+      <th>{{ entry.name }}</th>
+      <td>{{ entry.description }}</td>
+      <td>{{ entry.status }}</td>
+      <td>
+        <div *ngFor="let x of emptyArray"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,11 @@
+.pagination {
+    margin-top: 5px;
+}
+
+.pagination span {
+    padding: 0 4px;
+}
+
+.pagination span:first-child {
+    padding-left: 0;
+}
