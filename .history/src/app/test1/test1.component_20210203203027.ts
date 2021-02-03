@@ -113,11 +113,16 @@ export class Test1Component implements OnInit {
     // if no array provided get the initial array
     const data = (array.length === 0) ? this.data.slice(0) : array;
 
-    // re-calculate total pages
-    this.calculateTotalPages(data);
+    // reset current page
+    if (array.length === 0) {
+      this.page = 1;
+    }
 
     const start = (this.page - 1) * this.pageSize;
     const end = this.page * this.pageSize;
+
+    // re-calculate total pages
+    this.calculateTotalPages(data);
 
     // emit data
     this.subject.next(data.slice(start, end));
@@ -133,8 +138,13 @@ export class Test1Component implements OnInit {
 
   // next page button clicked
   nextPageBtnClicked() {
+
+    console.log('nextPageBtnClicked', this.page, this.totalPages);
+    console.log(this.filteredData$);
+
     if (this.page < this.totalPages) {
       this.page++;
+      console.log('nextPageBtnClicked', this.page, this.totalPages);
       this.paginateData(this.filteredData$);
     }
   }

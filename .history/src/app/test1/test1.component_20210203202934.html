@@ -24,7 +24,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let entry of paginatedData$ | async; trackBy:trackByName">
+    <!-- <tr *ngFor="let entry of paginatedData$ | async; trackBy:trackByName"> -->
+    <tr *ngFor="let entry of paginatedData$ | async">
       <th>{{ entry.name }}</th>
       <td>{{ entry.description }}</td>
       <td>{{ entry.status }}</td>

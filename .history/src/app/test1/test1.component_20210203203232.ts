@@ -133,8 +133,13 @@ export class Test1Component implements OnInit {
 
   // next page button clicked
   nextPageBtnClicked() {
+
+    console.log('nextPageBtnClicked', this.page, this.totalPages);
+    console.log(this.filteredData$);
+
     if (this.page < this.totalPages) {
       this.page++;
+      console.log('nextPageBtnClicked', this.page, this.totalPages);
       this.paginateData(this.filteredData$);
     }
   }
