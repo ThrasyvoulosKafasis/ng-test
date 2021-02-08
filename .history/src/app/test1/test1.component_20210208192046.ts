@@ -35,7 +35,8 @@ export class Test1Component implements OnInit {
     this.initRandomData();
 
     this.dataWithFilteringAndPaging$ = combineLatest(
-      this.pageSubject,
+      // this.pageSubject,
+      of(this.page),
       this.dataRowsSubject,
       this.searchInput.valueChanges
         .pipe(
@@ -51,7 +52,6 @@ export class Test1Component implements OnInit {
 
           const pageSize: number = 20;
 
-          // filtered data here in order to calculate total pages
           let filtered = this.filterData(rows, searchValue);
 
           this.totalPages = Math.ceil(filtered.length / pageSize);

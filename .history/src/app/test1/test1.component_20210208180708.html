@@ -1,0 +1,45 @@
+<div>
+  Search:
+  <input type="text"
+         [formControl]="searchInput">
+</div>
+
+<div class="pagination">
+
+  <span *ngIf="page > 1">
+
+  </span>
+
+
+</div>
+
+<!-- 
+  <button (click)="prevPageBtnClicked()">&lt;</button> Prev </span>
+
+  <span> {{ page }} of {{ totalPages }} pages</span>
+
+  <span *ngIf="page < totalPages">Next <button (click)="nextPageBtnClicked()">&gt;</button></span>
+</div> -->
+
+<table>
+  <!-- <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <!-- Seems to have no functionality -->
+  <!-- <th>Cool column</th> -->
+  <!-- </tr> -->
+  <!-- </thead> -->
+  <tbody>
+    <!-- <tr *ngFor="let entry of paginatedData$ | async; trackBy:trackByName">
+      <th>{{ entry.name }}</th>
+      <td>{{ entry.description }}</td>
+      <td>{{ entry.status }}</td> -->
+    <!-- Seems to have no functionality -->
+    <!-- <td>
+        <div *ngFor="let x of emptyArray"></div>
+      </td> -->
+    <!-- </tr> -->
+  </tbody>
+</table>

@@ -51,7 +51,6 @@ export class Test1Component implements OnInit {
 
           const pageSize: number = 20;
 
-          // filtered data here in order to calculate total pages
           let filtered = this.filterData(rows, searchValue);
 
           this.totalPages = Math.ceil(filtered.length / pageSize);

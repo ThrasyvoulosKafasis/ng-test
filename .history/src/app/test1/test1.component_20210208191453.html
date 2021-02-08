@@ -10,9 +10,10 @@
     <button (click)="changePage(false)">&lt;</button> Prev
   </span>
 
-  <span> {{ page }} of {{ totalPages }} pages</span>
+  <span> {{ pageSubject.value }} of {{ totalPages }} pages</span>
 
-  <span *ngIf="page < totalPages">Next
+  <!-- <span *ngIf="page < totalPages">Next -->
+  <span>Next
     <button (click)="changePage(true)">&gt;</button>
   </span>
 
@@ -25,6 +26,8 @@
       <th>Name</th>
       <th>Description</th>
       <th>Status</th>
+      <!-- Seems to have no functionality
+      <th>Cool column</th> -->
     </tr>
   </thead>
 
@@ -33,6 +36,9 @@
       <th>{{ entry.name }}</th>
       <td>{{ entry.description }}</td>
       <td>{{ entry.status }}</td>
+      <!-- <td>
+        <div *ngFor="let x of emptyArray"></div>
+      </td> -->
     </tr>
   </tbody>
 

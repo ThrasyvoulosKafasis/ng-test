@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as randomWords from 'random-words';
-import { BehaviorSubject, combineLatest, fromEvent, Observable, of, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, tap } from 'rxjs/operators';
 
 export interface IEntry {
@@ -19,13 +19,16 @@ export class Test1Component implements OnInit {
 
   // pagination variables
   page: number = 1;
+  pageSize: number = 20;
   totalPages: number = 0;
 
   // search variable
+  name = new FormControl('');
   searchInput = new FormControl('');
 
   // data variables
   data: IEntry[];
+  filteredData: IEntry[];
   private dataRowsSubject: BehaviorSubject<IEntry[]> = new BehaviorSubject<IEntry[]>([]);
   pageSubject: BehaviorSubject<number> = new BehaviorSubject<number>(1);
   dataWithFilteringAndPaging$: Observable<IEntry[]>;
@@ -49,14 +52,11 @@ export class Test1Component implements OnInit {
       .pipe(
         map(([page, rows, searchValue]) => {
 
-          const pageSize: number = 20;
-
-          // filtered data here in order to calculate total pages
           let filtered = this.filterData(rows, searchValue);
 
-          this.totalPages = Math.ceil(filtered.length / pageSize);
+          this.totalPages = Math.ceil(filtered.length / this.pageSize);
 
-          return filtered.slice((page - 1) * pageSize, page * pageSize);
+          return filtered.slice((page - 1) * this.pageSize, page * this.pageSize);
         })
       );
   }

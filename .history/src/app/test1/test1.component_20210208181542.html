@@ -6,14 +6,16 @@
 
 <div class="pagination">
 
-  <span *ngIf="page > 1">
-    <button (click)="changePage(false)">&lt;</button> Prev
+  <!-- <span *ngIf="page > 1"> -->
+  <span>
+    <button (click)="prevPageBtnClicked()">&lt;</button> Prev
   </span>
 
   <span> {{ page }} of {{ totalPages }} pages</span>
 
-  <span *ngIf="page < totalPages">Next
-    <button (click)="changePage(true)">&gt;</button>
+  <!-- <span *ngIf="page < totalPages">Next -->
+  <span>Next
+    <button (click)="nextPageBtnClicked()">&gt;</button>
   </span>
 
 </div>
@@ -25,6 +27,8 @@
       <th>Name</th>
       <th>Description</th>
       <th>Status</th>
+      <!-- Seems to have no functionality
+      <th>Cool column</th> -->
     </tr>
   </thead>
 
@@ -33,6 +37,9 @@
       <th>{{ entry.name }}</th>
       <td>{{ entry.description }}</td>
       <td>{{ entry.status }}</td>
+      <!-- <td>
+        <div *ngFor="let x of emptyArray"></div>
+      </td> -->
     </tr>
   </tbody>
 

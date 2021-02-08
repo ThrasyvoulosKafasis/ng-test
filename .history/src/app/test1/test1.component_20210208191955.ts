@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as randomWords from 'random-words';
-import { BehaviorSubject, combineLatest, fromEvent, Observable, of, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, tap } from 'rxjs/operators';
 
 export interface IEntry {
@@ -51,7 +51,6 @@ export class Test1Component implements OnInit {
 
           const pageSize: number = 20;
 
-          // filtered data here in order to calculate total pages
           let filtered = this.filterData(rows, searchValue);
 
           this.totalPages = Math.ceil(filtered.length / pageSize);

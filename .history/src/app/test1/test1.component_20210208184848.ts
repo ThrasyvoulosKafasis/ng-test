@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as randomWords from 'random-words';
-import { BehaviorSubject, combineLatest, fromEvent, Observable, of, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, timer } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, tap } from 'rxjs/operators';
 
 export interface IEntry {
@@ -17,11 +17,16 @@ export interface IEntry {
 })
 export class Test1Component implements OnInit {
 
+  // Seems to have no functionality
+  // emptyArray = new Array(1000); 
+
   // pagination variables
   page: number = 1;
+  pageSize: number = 20;
   totalPages: number = 0;
 
   // search variable
+  name = new FormControl('');
   searchInput = new FormControl('');
 
   // data variables
@@ -34,7 +39,8 @@ export class Test1Component implements OnInit {
 
     this.initRandomData();
 
-    this.dataWithFilteringAndPaging$ = combineLatest(
+    // this.dataWithFilteringAndPaging$ = 
+    combineLatest(
       this.pageSubject,
       this.dataRowsSubject,
       this.searchInput.valueChanges
@@ -45,20 +51,25 @@ export class Test1Component implements OnInit {
           // emit when the current value is different than the last 
           distinctUntilChanged()
         )
-    )
-      .pipe(
-        map(([page, rows, searchValue]) => {
+    ).subscribe(
+      ([page, rows, searchValue]) => {
 
-          const pageSize: number = 20;
+        console.log(page, rows, searchValue);
 
-          // filtered data here in order to calculate total pages
-          let filtered = this.filterData(rows, searchValue);
+        let filtered = this.filterData([...this.data], searchValue);
 
-          this.totalPages = Math.ceil(filtered.length / pageSize);
+        console.log(filtered);
 
-          return filtered.slice((page - 1) * pageSize, page * pageSize);
-        })
-      );
+        // let paginated =
+
+      }
+    );
+
+    // calculate the initial total pages
+    // this.calculateTotalPages(this.data);
+
+    // paginate with the initial values
+    // this.paginateData();
   }
 
   // create random data
@@ -111,8 +122,30 @@ export class Test1Component implements OnInit {
     return Array.from(set);
   }
 
+  // set data based on pagination values
+  paginateData(array = []) {
+
+    // // if no array provided get the initial array
+    // const data = (array.length === 0) ? this.data.slice(0) : array;
+
+    // // re-calculate total pages
+    // this.calculateTotalPages(data);
+
+    // const start = (this.page - 1) * this.pageSize;
+    // const end = this.page * this.pageSize;
+
+    // // emit data
+    // this.subject.next(data.slice(start, end));
+  }
+
   // change pagination current page
   changePage(toNext: boolean) {
-    this.pageSubject.next(toNext ? ++this.page : --this.page);
+    let currentPage: number = this.pageSubject.value;
+    this.pageSubject.next(toNext ? ++currentPage : --currentPage);
+  }
+
+  // calculate the total pages for pagination
+  calculateTotalPages(array: IEntry[]) {
+    // this.totalPages = Math.ceil(array.length / this.pageSize);
   }
 }
